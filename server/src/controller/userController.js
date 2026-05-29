@@ -35,6 +35,7 @@ res.cookie("token", token, {
   httpOnly: true,
   sameSite: "none",
   secure: true,
+  
     path: "/",
   maxAge: 24 * 60 * 60 * 1000,
 });
@@ -84,12 +85,10 @@ res.cookie("token", token, {
 };
 
 const LogOut = async (req, res) => {
-  res.clearCookie("token", {
-  httpOnly: true,
-  sameSite: "none",
-  secure: true,
-  path:"/"
-});
+  res.setHeader(
+    "Set-Cookie",
+    "token=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0"
+  );
   res.status(200).json({
     success: true,
     message: "User logged Out successfully",
