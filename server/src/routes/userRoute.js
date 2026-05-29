@@ -3,7 +3,9 @@ import { registerUser, loginUser, getInfo, updatePassword, forgetPassword, LogOu
 import { authenticateJWT } from "../middleware/auth.js";
 
 const router = Router();
-
+router.get('/test',(req,res)=>{
+    res.send("success")
+})
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/logout", LogOut)
