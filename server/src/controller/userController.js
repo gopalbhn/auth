@@ -170,7 +170,7 @@ const resetPassword = async (req, res) => {
       message: "Invalid token",
     });
   }
-  const newPassword = await bcrypt.hash(req.body.password, 10);
+
   user.password = newPassword;
   user.token = null;
   await user.save();
