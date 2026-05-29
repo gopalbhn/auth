@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import ConnectDB from "./db/connection.js";
 dotenv.config();
 import app from "./app.js";
+import serverless from "serverless-http";
 const PORT = process.env.PORT || 3000;
 
 ConnectDB()
@@ -14,4 +15,4 @@ ConnectDB()
     console.log("Internal Server Error",err.message)
 })
 
-export default app
+export default serverless(app)
