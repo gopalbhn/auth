@@ -25,6 +25,7 @@ const NavBar = () => {
     });
 
     if (res.ok) {
+      alert("loged out successfully")
       window.location.href = "/";
     }
   }
