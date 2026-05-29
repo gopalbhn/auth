@@ -1,18 +1,13 @@
 import dotenv from "dotenv"
-import ConnectDB from "./db/connection.js";
 dotenv.config();
-import app from "./app.js";
-import serverless from "serverless-http";
-const PORT = process.env.PORT || 3000;
 
-ConnectDB()
-.then(()=>{
-  
- console.log("Database Connected");
+import express from "express"
+import serverless from "serverless-http"
 
-})
-.catch((err)=>{
-    console.log("Internal Server Error",err.message)
+const app = express()
+
+app.get("/api/user/test", (req, res) => {
+  res.json({ message: "function is alive" })
 })
 
 export default serverless(app)
