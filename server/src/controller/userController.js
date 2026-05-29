@@ -35,6 +35,7 @@ res.cookie("token", token, {
   httpOnly: true,
   sameSite: "none",
   secure: true,
+    path: "/",
   maxAge: 24 * 60 * 60 * 1000,
 });
   res.status(200).json({
@@ -72,6 +73,7 @@ res.cookie("token", token, {
   httpOnly: true,
   sameSite: "none",
   secure: true,
+    path: "/",
   maxAge: 24 * 60 * 60 * 1000,
 });
   res.status(200).json({
@@ -82,11 +84,11 @@ res.cookie("token", token, {
 };
 
 const LogOut = async (req, res) => {
-  res.cookie("token", "", {
+  res.clearCookie("token", {
   httpOnly: true,
   sameSite: "none",
   secure: true,
-    maxAge: 0, 
+  path:"/"
 });
   res.status(200).json({
     success: true,
