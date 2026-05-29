@@ -86,7 +86,7 @@ res.cookie("token", "",{
   httpOnly: true,
   sameSite: "none",
   secure: true,
-  maxAge: 1000,
+  path:"/"
 });
   res.status(200).json({
     success: true,
