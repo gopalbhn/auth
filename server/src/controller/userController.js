@@ -86,6 +86,7 @@ const LogOut = async (req, res) => {
   httpOnly: true,
   sameSite: "none",
   secure: true,
+    maxAge: 0, 
 });
   res.status(200).json({
     success: true,
