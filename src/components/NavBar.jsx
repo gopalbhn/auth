@@ -19,7 +19,7 @@ const NavBar = () => {
   console.log("islog", isloggedIn);
 
   async function handleSignout() {
-    const res = await fetch(`${import.meta.env.BACKEND_URL}/api/user/logout`, {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {
       method: "GET",
       credentials: "include",
     });

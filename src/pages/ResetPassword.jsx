@@ -12,7 +12,7 @@ const ResetPassword = () => {
       alert("Passwords do not match")
       return
     }
-    const res = await fetch(`${import.meta.env.BACKEND_URL}/api/user/reset/` + token, {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/reset/` + token, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

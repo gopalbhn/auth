@@ -4,7 +4,7 @@ const ForgetPassword = () => {
     const [email, setEmail] = useState("")
 
     async function handleClick() {
-        const res = await fetch(`${import.meta.env.BACKEND_URL}/api/user/forget-password`, {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forget-password`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

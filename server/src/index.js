@@ -6,13 +6,12 @@ const PORT = process.env.PORT || 3000;
 
 ConnectDB()
 .then(()=>{
-    app.listen(PORT,()=>{
-        console.log(`App is Running on Port ${PORT}`)
-    })
-    app.on("error",(err)=>{
-        console.log("Failed to start Server",err.message)
-    })
+  
+ console.log("Database Connected");
+
 })
 .catch((err)=>{
     console.log("Internal Server Error",err.message)
 })
+
+export default app

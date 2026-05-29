@@ -6,7 +6,7 @@ const ChangePassword = () => {
 
     async function handleClick() {
         console.log(oldpassword,newpassword)
-        const res = await fetch(`${import.meta.env.BACKEND_URL}/api/user/update-password`, {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update-password`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
