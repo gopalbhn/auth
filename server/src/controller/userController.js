@@ -82,10 +82,16 @@ res.cookie("token", token, {
 };
 
 const LogOut = async (req, res) => {
- return res.cookie("token","",{maxAge:0}).json({
-        message: "Successfully logged out",
-        success: true,
-      })
+  res.cookie("token", "", {
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+});
+  res.status(200).json({
+    success: true,
+    message: "User logged Out successfully",
+
+  });
 }
 
 const getInfo = async (req, res) => {
