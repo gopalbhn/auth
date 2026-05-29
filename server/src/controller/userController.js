@@ -31,11 +31,12 @@ const registerUser = async (req, res) => {
 
   const token = generateJwt(newUser);
   console.log("generated token", token)
-  res.cookie("token", token, {
-    httpOnly: false,
-    sameSite: "lax",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+res.cookie("token", token, {
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+  maxAge: 24 * 60 * 60 * 1000,
+});
   res.status(200).json({
     message: "User registerd sucessfully",
     success: true,
@@ -67,11 +68,12 @@ const loginUser = async (req, res) => {
     });
   }
   const token = generateJwt(user);
-  res.cookie("token", token, {
-    httpOnly: false,
-    sameSite: "lax",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+res.cookie("token", token, {
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+  maxAge: 24 * 60 * 60 * 1000,
+});
   res.status(200).json({
     success: true,
     message: "User logged in successfully",
@@ -80,11 +82,12 @@ const loginUser = async (req, res) => {
 };
 
 const LogOut = async (req, res) => {
-  res.cookie("token", "", {
-    httpOnly: false,
-    sameSite: "lax",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+res.cookie("token", token, {
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+  maxAge: 1000,
+});
   res.status(200).json({
     success: true,
     message: "User logged Out successfully",
@@ -147,7 +150,7 @@ const forgetPassword = async (req, res) => {
   const token = String(Math.floor(Math.random() * 9000) + 1000);
   user.token = token;
   await user.save();
-  await sendMail(email, "Password Reset", `http://localhost:5173/reset/${token}`)
+  await sendMail(email, "Password Reset", `${process.env.FRONTEND_URL}/reset/${token}`)
 
   res.status(200).json({
     success: true,
