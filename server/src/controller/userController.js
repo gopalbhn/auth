@@ -82,11 +82,11 @@ res.cookie("token", token, {
 };
 
 const LogOut = async (req, res) => {
-res.clearCookie("token", {
+res.cookie("token", "",{
   httpOnly: true,
-  secure: true,
   sameSite: "none",
-  path: "/",
+  secure: true,
+  expires:new Date(0)
 });
   res.status(200).json({
     success: true,
