@@ -1,7 +1,7 @@
 import { generateJwt, authenticateJWT } from "../middleware/auth.js";
 import User from "../models/userSchema.js";
 import { sendMail } from "../utils/nodemailer.js";
-import bcrypt  from 'bcrypt'
+import bcrypt from "bcrypt";
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -30,15 +30,14 @@ const registerUser = async (req, res) => {
   await newUser.save();
 
   const token = generateJwt(newUser);
-  console.log("generated token", token)
-res.cookie("token", token, {
-  httpOnly: true,
-  sameSite: "none",
-  secure: true,
-  
+  console.log("generated token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
     path: "/",
-  maxAge: 24 * 60 * 60 * 1000,
-});
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   res.status(200).json({
     message: "User registerd sucessfully",
     success: true,
@@ -70,13 +69,13 @@ const loginUser = async (req, res) => {
     });
   }
   const token = generateJwt(user);
-res.cookie("token", token, {
-  httpOnly: true,
-  sameSite: "none",
-  secure: true,
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
     path: "/",
-  maxAge: 24 * 60 * 60 * 1000,
-});
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   res.status(200).json({
     success: true,
     message: "User logged in successfully",
@@ -86,17 +85,16 @@ res.cookie("token", token, {
 
 const LogOut = async (req, res) => {
   res.clearCookie("token", {
-  httpOnly: true,
-  sameSite: "none",
-  secure: true,
-  path:"/"
-});
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    path: "/",
+  });
   res.status(200).json({
     success: true,
     message: "User logged Out successfully",
-
   });
-}
+};
 
 const getInfo = async (req, res) => {
   const user = req.user;
@@ -109,8 +107,8 @@ const getInfo = async (req, res) => {
 
 const updatePassword = async (req, res) => {
   const { oldpassword, newpassword } = req.body;
-  console.log(req.body)
-  console.log("odlpassword", oldpassword, newpassword)
+  console.log(req.body);
+  console.log("odlpassword", oldpassword, newpassword);
   if (!oldpassword || !newpassword) {
     return res.status(400).json({
       success: false,
@@ -153,7 +151,11 @@ const forgetPassword = async (req, res) => {
   const token = String(Math.floor(Math.random() * 9000) + 1000);
   user.token = token;
   await user.save();
-  await sendMail(email, "Password Reset", `${process.env.FRONTEND_URL}/reset/${token}`)
+  await sendMail(
+    email,
+    "Password Reset",
+    `${process.env.FRONTEND_URL}/reset/${token}`,
+  );
 
   res.status(200).json({
     success: true,
@@ -165,8 +167,8 @@ const forgetPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const token = req.params.token;
-  const {password} = req.body
-  console.log("token",token)
+  const { password } = req.body;
+  console.log("token", token);
   const user = await User.findOne({ token });
   if (!user) {
     return res.status(400).json({
@@ -182,6 +184,14 @@ const resetPassword = async (req, res) => {
     success: true,
     message: "Password reset successfully",
   });
-}
+};
 
-export { registerUser, loginUser, getInfo, updatePassword, forgetPassword, LogOut, resetPassword }
+export {
+  registerUser,
+  loginUser,
+  getInfo,
+  updatePassword,
+  forgetPassword,
+  LogOut,
+  resetPassword,
+};

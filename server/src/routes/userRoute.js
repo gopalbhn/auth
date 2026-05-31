@@ -8,7 +8,7 @@ router.get('/test',(req,res)=>{
 })
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get("/logout", LogOut)
+router.post("/logout", LogOut)
 router.get('/me', authenticateJWT, getInfo);
 router.put("/update-password", authenticateJWT, updatePassword);
 router.post("/forget-password", forgetPassword);

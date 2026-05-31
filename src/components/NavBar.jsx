@@ -20,14 +20,16 @@ const NavBar = () => {
 
   async function handleSignout() {
     const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     });
 
     if (res.ok) {
       alert("loged out successfully")
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=yourdomain.com"
-      window.location.href="/"
+      setTimeout(()=>{
+
+        window.location.href="/"
+      },700)
       
     }
   }
